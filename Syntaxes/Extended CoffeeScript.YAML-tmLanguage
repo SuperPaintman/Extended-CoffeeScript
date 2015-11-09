@@ -1,0 +1,450 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Extended CoffeeScript
+scopeName: source.coffee
+fileTypes: 
+- coffee
+- iced
+- Cakefile
+- coffee.erb
+- cson
+uuid: 527b595a-7f95-4e39-874a-89a96f4ef9f3
+
+patterns:
+- include: '#function'
+
+- include: '#string'
+
+- include: '#constant'
+
+- include: '#comment'
+
+- include: '#regexp'
+
+- include: '#keyword'
+
+- include: '#variable'
+
+- include: '#support'
+
+- include: '#oop'
+
+- include: '#invalid'
+
+- include: '#other'
+
+
+# - include: '#string_single_quoted'
+# - include: '#string_double_quoted'
+# - include: '#constant_numeric'
+
+repository:
+  function:
+    # @?[a-zA-Z\$_][\w\.]*
+    patterns:
+    # - match: (\([^()]*?\))\s*([=-]>)
+    #   name: meta.inline.function.coffee
+    #   captures:
+    #     '1':
+    #       name: variable.parameter.function.coffee
+    #     '2':
+    #       name: storage.type.function.coffee
+
+    - begin: >-
+        (?x)
+          (?=\([^()]*\)\s*([=-]>))
+      # end: (?<=\))\s*(=>)
+      end: (\))\s*([=-]>)
+      name: meta.inline.function.coffee
+      captures:
+        '2':
+          name: storage.type.function.coffee
+
+      patterns:
+      - include: '#function_parameters'
+
+    - match: ([=-]>)
+      name: storage.type.function.coffee
+
+  function_parameters:
+    patterns:
+    - include: '#constant'
+    - include: '#keyword_operator'
+
+    - match: (@?[a-zA-Z\$_][\w\.]*)
+      name: variable.parameter.function.coffee
+
+  string:
+    patterns:
+    # Multi-line string
+    - begin: \'\'\'
+      beginCaptures:
+        '0':
+          name: punctuation.definition.string.begin.coffee
+      end: \'\'\'
+      endCaptures:
+        '0':
+          name: punctuation.definition.string.end.coffee
+      name: string.quoted.triple.coffee
+
+    - begin: \"\"\"
+      beginCaptures:
+        '0':
+          name: punctuation.definition.string.begin.coffee
+      end: \"\"\"
+      endCaptures:
+        '0':
+          name: punctuation.definition.string.end.coffee
+      name: string.quoted.triple.coffee
+
+    - include: '#string_js'
+    - include: '#string_double_quoted'
+    - include: '#string_single_quoted'
+    - include: '#string_interpolated'
+
+  string_double_quoted:
+    patterns:
+    - begin: \"
+      beginCaptures:
+        '0':
+          name: punctuation.definition.string.begin.coffee
+      end: \"
+      endCaptures:
+        '0':
+          name: punctuation.definition.string.end.coffee
+      name: string.quoted.double.coffee
+      patterns:
+      - match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)
+        name: constant.character.escape.coffee
+      - include: '#string_interpolated'
+
+  string_single_quoted:
+    patterns:
+    - begin: \'
+      beginCaptures:
+        '0':
+          name: punctuation.definition.string.begin.coffee
+      end: \'
+      endCaptures:
+        '0':
+          name: punctuation.definition.string.end.coffee
+      name: string.quoted.single.coffee
+      patterns:
+      - match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)
+        name: constant.character.escape.coffee
+
+  string_js:
+    patterns:
+    # JS code
+    - begin: \`
+      beginCaptures:
+        '0':
+          name: punctuation.definition.string.begin.coffee
+      end: \`
+      endCaptures:
+        '0':
+          name: punctuation.definition.string.end.coffee
+      name: string.interpolated.script.coffee
+      patterns:
+      - match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)
+        name: constant.character.escape.coffee
+
+  string_interpolated:
+    patterns:
+    - begin: \#\{
+      captures:
+        '0':
+          name: punctuation.section.embedded.coffee
+      end: \}
+      name: source.coffee.embedded.source
+      patterns:
+      - include: $self
+
+  constant:
+    patterns:
+    # Boolean
+    - match: \b(?<!\.)(true|on|yes)(?!\s*[:=])\b
+      name: constant.language.boolean.true.coffee
+
+    - match: \b(?<!\.)(false|off|no)(?!\s*[:=])\b
+      name: constant.language.boolean.false.coffee
+
+    # Null
+    - match: \b(?<!\.)null(?!\s*[:=])\b
+      name: constant.language.null.coffee
+
+    - match: \b(Infinity|NaN|undefined)\b
+      name: constant.language.coffee
+
+    # OOP
+    - match: \b(?<!\.)(this|extends)(?!\s*[:=])\b
+      name: variable.language.coffee
+
+    - include: '#constant_numeric'
+
+  constant_numeric:
+    patterns:
+    - match: (?<!\$)\b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?))\b
+      name: constant.numeric.coffee
+
+  comment:
+    # Multi-line comment
+    patterns:
+    - begin: (?<!#)###(?!#)
+      captures:
+        '0':
+          name: punctuation.definition.comment.coffee
+      end: '###(?:[ \t]*\n)'
+      name: comment.block.coffee
+      patterns:
+      - match: '@\w*'
+        name: storage.type.annotation.coffeescript
+
+    # Single
+    - match: (#)(?!\{).*$\n?
+      captures:
+        '1':
+          name: punctuation.definition.comment.coffee
+      name: comment.line.number-sign.coffee
+
+    - include: '#comment_embedded'
+
+  comment_embedded:
+    patterns:
+    - captures:
+        '1':
+          name: punctuation.definition.comment.coffee
+      match: (?<!\\)(#).*$\n?
+      name: comment.line.number-sign.coffee
+
+  regexp:
+    patterns:
+    # Multi-line regexp
+    - begin: /{3}
+      end: /{3}[imgy]{0,4}
+      name: string.regexp.coffee
+      patterns:
+      - include: '#string_interpolated'
+      - include: '#comment_embedded'
+
+    # Single regexp
+    - match: /(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])
+      name: string.regexp.coffee
+
+  keyword:
+    patterns:
+    # Debug
+    - match: \b(debugger|\\)\b
+      name: keyword.other.coffee
+
+    - include: '#keyword_operator'
+    - include: '#keyword_control'
+
+  keyword_operator:
+    patterns:
+    - match: >-
+        (?x)
+          and=|or=|!|%|&|\^|\*|\/|(\-)?\-(?!>)|\+\+|\+|~|==|=(?!>)|!=|<=|>=|<<=|>>=|
+          >>>=|<>|<|>|!|&&|\.\.(\.)?|\?|\||\|\||\:|\*=|(?<!\()/=|%=|\+=|\-=|&=|
+          \^=|\b(?<![\.\$])(instanceof|new|delete|typeof|and|or|is|isnt|not|super)\b
+      name: keyword.operator.coffee
+
+  keyword_control:
+    patterns:
+    - match: >-
+        (?x)
+          \b(?<![\.\$])(
+            break|by|catch|continue|else|finally|for|in|of|if|return|switch|
+            then|throw|try|unless|when|while|until|loop|do|await|defer|(?<=for)\s+own
+          )(?!\s*:)\b
+      name: keyword.control.coffee
+
+  variable:
+    patterns:
+    - include: '#invalid'
+    # - include: '#variable_name'
+    - include: '#variable_instance'
+
+  variable_name:
+    patterns:
+    - captures:
+        '1':
+          name: variable.assignment.coffee
+      match: ([a-zA-Z\$_]\w*(\.\w+)*)
+      name: variable.assignment.coffee
+
+  variable_instance:
+    patterns:
+    - match: (@)([a-zA-Z_\$]\w*)?
+      name: variable.other.readwrite.instance.coffee
+
+  support:
+    patterns:
+    # General
+    - match: >-
+        (?x)\b(
+              decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int)|require
+            )\b
+      name: support.function.coffee
+
+    - match: >-
+        (?x)
+          ((?<=\.)(
+            apply|call|concat|every|filter|forEach|from|hasOwnProperty|indexOf|
+            isPrototypeOf|join|lastIndexOf|map|of|pop|propertyIsEnumerable|push|
+            reduce(Right)?|reverse|shift|slice|some|sort|splice|to(Locale)?String|
+            unshift|valueOf|
+            length
+          ))\b
+      name: support.function.method.array.coffee
+
+    # Types
+    - match: >-
+        (?x)
+          \b(
+            Array|ArrayBuffer|Blob|Boolean|Date|document|Function|
+            Int(8|16|32|64)Array|Math|Map|Number|
+            Object|Proxy|RegExp|Set|String|WeakMap|
+            window|Uint(8|16|32|64)Array|XMLHttpRequest
+          )\b
+      name: support.class.coffee
+
+    # Array
+    - match: >-
+        (?x)
+          ((?<=Array\.)(
+                isArray
+          ))\b
+      name: support.function.static.array.coffee
+
+    # Object
+    - match: >-
+        (?x)
+          ((?<=Object\.)(
+            create|definePropert(ies|y)|freeze|getOwnProperty(Descriptors?|Names)|
+            getProperty(Descriptor|Names)|getPrototypeOf|is(Extensible|Frozen|Sealed)?|
+            isnt|keys|preventExtensions|seal
+          ))\b
+      name: support.function.static.object.coffee
+
+    # Math
+    - match: >-
+        (?x)
+          ((?<=Math\.)(
+            abs|acos|acosh|asin|asinh|atan|atan2|atanh|ceil|cos|cosh|exp|expm1|floor|
+            hypot|log|log10|log1p|log2|max|min|pow|random|round|sign|sin|sinh|sqrt|
+            tan|tanh|trunc
+          ))\b
+      name: support.function.static.math.coffee
+
+    # Number
+    - match: >-
+        (?x)
+          ((?<=Number\.)(
+            is(Finite|Integer|NaN)|toInteger
+          ))\b
+      name: support.function.static.number.coffee
+
+    # Console
+    - match: \b(console)\b
+      name: entity.name.type.object.coffee
+
+    - match: ((?<=console\.)(debug|warn|info|log|error|time|timeEnd|assert))\b
+      name: support.function.console.coffee
+
+  oop:
+    patterns:
+    - match: (new)\s+(\w+(?:\.\w*)*)
+      captures:
+        '1':
+          name: keyword.operator.new.coffee
+        '2':
+          name: entity.name.type.instance.coffee
+    
+      name: meta.class.instance.constructo
+
+    # Class
+    - match: (class\b)\s+(@?[a-zA-Z\$_][\w\.]*)?(?:\s+(extends)\s+(@?[a-zA-Z\$\._][\w\.]*))?
+      captures:
+        '1':
+          name: storage.type.class.coffee
+        '2':
+          name: entity.name.type.class.coffee
+        '3':
+          name: keyword.control.inheritance.coffee
+        '4':
+          name: entity.other.inherited-class.coffee
+      name: meta.class.coffee
+
+  invalid:
+    patterns:
+    - match: \;
+      name: invalid.deprecated.statement.coffee
+
+    - match: >-
+        (?x)\b(
+              var
+            )\b
+      name: invalid.illegal.storage.type.coffee
+
+  other:
+    patterns:
+    - match: ',[ |\t]*'
+      name: meta.delimiter.object.comma.coffee
+    - match: \.
+      name: meta.delimiter.method.period.coffee
+    - match: \{|\}
+      name: meta.brace.curly.coffee
+    - match: \(|\)
+      name: meta.brace.round.coffee
+    - match: \[|\]\s*
+      name: meta.brace.square.coffee
+
+    # : в объекте
+    - match: ([a-zA-Z\$_](\w|\$|\.)*\s*(?!\::)((:)|(=)(?!>))(?!(\s*\(.*\))?\s*([=-]>)))
+      captures:
+        '1':
+          name: variable.assignment.coffee
+        '4':
+          name: keyword.operator.coffee ###############
+        '5':
+          name: keyword.operator.coffee
+      
+      name: variable.assignment.coffee
+
+    # Что это?
+    - begin: (?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])
+      beginCaptures:
+        '0':
+          name: keyword.operator.coffee
+      end: ([\]\}]\s*[:=])
+      endCaptures:
+        '0':
+          name: keyword.operator.coffee
+      name: meta.variable.assignment.destructured.coffee
+      patterns:
+      - include: '#variable_name'
+      - include: '#variable_instance'
+      - include: '#string_single_quoted'
+      - include: '#string_double_quoted'
+      - include: '#constant_numeric'
+
+    # Что это?
+    - captures:
+        '2':
+          name: entity.name.function.coffee
+        '3':
+          name: entity.name.function.coffee
+        '4':
+          name: variable.parameter.function.coffee
+        '5':
+          name: storage.type.function.coffee
+      match: >-
+        (?x)
+          (\s*)
+          (?=[a-zA-Z\$_])
+          (
+            [a-zA-Z\$_](\w|\$|:|\.)*\s*
+            (?=[:=](\s*\(.*\))?\s*([=-]&gt;))
+          )
+      name: meta.function.coffee
