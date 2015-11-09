@@ -8,7 +8,7 @@ fileTypes:
 - Cakefile
 - coffee.erb
 - cson
-uuid: 527b595a-7f95-4e39-874a-89a96f4ef9f3
+uuid: 0321607f-f411-4545-a4e3-9707153e48e6
 
 patterns:
 - include: '#function'

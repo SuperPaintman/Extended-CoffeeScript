@@ -1,10 +1,10 @@
 {  
    "description":"A TextMate Bundle for CoffeeScript / IcedCoffeeScript",
-   "url":"https://github.com/dhoelzgen/iced-coffee-script-tmbundle",
+   "url":"https://github.com/SuperPaintman/Extended-CoffeeScript",
    "platforms":[  
       "*"
    ],
-   "version":"2015.09.11.17.51.00",
+   "version":"2015.09.11.18.08.00",
    "sublime_text":"*",
    "dependencies":[]
 }

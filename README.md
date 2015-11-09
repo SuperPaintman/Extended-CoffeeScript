@@ -12,7 +12,6 @@ Improved version [CoffeeScript](https://github.com/Xavura/CoffeeScript-Sublime-P
 * [*Added*] - highlighting `await` for *Iced*
 * [*Added*] - highlighting `defer` for *Iced*
 * [*Added*] - highlighting `module.exports` for *Node.js*
-* [*Added*] - highlighting `Buffer` class
 * [*Added*] - highlighting `length` property
 * [*Added*] - highlighting `yield`
 * [*Added*] - highlighting `:` separator in objects
