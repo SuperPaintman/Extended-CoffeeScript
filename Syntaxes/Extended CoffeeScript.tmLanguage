@@ -189,8 +189,25 @@
 				<dict>
 					<key>begin</key>
 					<string>(?x)
+  (?=\s*)
+  (([a-zA-Z\$_]*)\s*([:=])\s*)?
   (?=\([^()]*\)\s*([=-]&gt;))</string>
-					<key>captures</key>
+					<key>beginCaptures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.coffee</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(\))\s*([=-]&gt;)</string>
+					<key>endCaptures</key>
 					<dict>
 						<key>2</key>
 						<dict>
@@ -198,10 +215,6 @@
 							<string>storage.type.function.coffee</string>
 						</dict>
 					</dict>
-					<key>end</key>
-					<string>(\))\s*([=-]&gt;)</string>
-					<key>name</key>
-					<string>meta.inline.function.coffee</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -211,10 +224,29 @@
 					</array>
 				</dict>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.coffee</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.function.coffee</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>([=-]&gt;)</string>
-					<key>name</key>
-					<string>storage.type.function.coffee</string>
+					<string>(?x)
+  (?=\s*)
+  (([a-zA-Z\$_]*)\s*([:=])\s*)?
+  (?=\s*)([=-]&gt;)</string>
 				</dict>
 			</array>
 		</dict>
@@ -231,8 +263,26 @@
 					<string>#keyword_operator</string>
 				</dict>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.coffee</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>(@?[a-zA-Z\$_][\w\.]*)</string>
+					<string>(@)?([a-zA-Z\$_][\w\.]*)</string>
 					<key>name</key>
 					<string>variable.parameter.function.coffee</string>
 				</dict>
@@ -287,7 +337,8 @@
 					<string>(?x)
   \b(?&lt;![\.\$])(
     break|by|catch|continue|else|finally|for|in|of|if|return|switch|
-    then|throw|try|unless|when|while|until|loop|do|await|defer|(?&lt;=for)\s+own
+    then|throw|try|unless|when|while|until|loop|do|await|defer|(?&lt;=for)\s+own|
+    yield
   )(?!\s*:)\b</string>
 					<key>name</key>
 					<string>keyword.control.coffee</string>
@@ -661,7 +712,7 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.embedded.coffee</string>
+							<string>keyword.operator.coffee</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -788,7 +839,8 @@
     Array|ArrayBuffer|Blob|Boolean|Date|document|Function|
     Int(8|16|32|64)Array|Math|Map|Number|
     Object|Proxy|RegExp|Set|String|WeakMap|
-    window|Uint(8|16|32|64)Array|XMLHttpRequest
+    window|Uint(8|16|32|64)Array|XMLHttpRequest|
+    Buffer
   )\b</string>
 					<key>name</key>
 					<string>support.class.coffee</string>
@@ -845,6 +897,18 @@
 					<key>name</key>
 					<string>support.function.console.coffee</string>
 				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(module)\b</string>
+					<key>name</key>
+					<string>entity.name.type.object.coffee</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>((?&lt;=module\.)(exports))\b</string>
+					<key>name</key>
+					<string>support.function.console.coffee</string>
+				</dict>
 			</array>
 		</dict>
 		<key>variable</key>
@@ -866,6 +930,19 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.readwrite.instance.coffee</string>
+						</dict>
+					</dict>
 					<key>match</key>
 					<string>(@)([a-zA-Z_\$]\w*)?</string>
 					<key>name</key>

@@ -52,26 +52,57 @@ repository:
 
     - begin: >-
         (?x)
+          (?=\s*)
+          (([a-zA-Z\$_]*)\s*([:=])\s*)?
           (?=\([^()]*\)\s*([=-]>))
       # end: (?<=\))\s*(=>)
       end: (\))\s*([=-]>)
-      name: meta.inline.function.coffee
-      captures:
+      # name: meta.inline.function.coffee
+      beginCaptures:
+        '2':
+          name: entity.name.function.coffee
+        '3':
+          name: keyword.operator.coffee
+
+      endCaptures:
         '2':
           name: storage.type.function.coffee
 
       patterns:
       - include: '#function_parameters'
 
-    - match: ([=-]>)
-      name: storage.type.function.coffee
+    - match: >-
+        (?x)
+          (?=\s*)
+          (([a-zA-Z\$_]*)\s*([:=])\s*)?
+          (?=\s*)([=-]>)
+      captures:
+        '2':
+          name: entity.name.function.coffee
+        '3':
+          name: keyword.operator.coffee
+        '4':
+          name: storage.type.function.coffee
+
+      # name: storage.type.function.coffee
+
+    # - match: ([=-]>)
+    #   name: storage.type.function.coffee
 
   function_parameters:
     patterns:
     - include: '#constant'
     - include: '#keyword_operator'
 
-    - match: (@?[a-zA-Z\$_][\w\.]*)
+    - match: (@)?([a-zA-Z\$_][\w\.]*)
+      captures:
+        '1':
+          # name: variable.language.this.coffee
+          name: keyword.other.this.coffee
+        '2':
+          name: variable.parameter.function.coffee
+        '4':
+          name: keyword.operator.coffee
       name: variable.parameter.function.coffee
 
   string:
@@ -154,7 +185,8 @@ repository:
     - begin: \#\{
       captures:
         '0':
-          name: punctuation.section.embedded.coffee
+          # name: punctuation.section.embedded.coffee
+          name: keyword.operator.coffee
       end: \}
       name: source.coffee.embedded.source
       patterns:
@@ -255,7 +287,8 @@ repository:
         (?x)
           \b(?<![\.\$])(
             break|by|catch|continue|else|finally|for|in|of|if|return|switch|
-            then|throw|try|unless|when|while|until|loop|do|await|defer|(?<=for)\s+own
+            then|throw|try|unless|when|while|until|loop|do|await|defer|(?<=for)\s+own|
+            yield
           )(?!\s*:)\b
       name: keyword.control.coffee
 
@@ -276,6 +309,12 @@ repository:
   variable_instance:
     patterns:
     - match: (@)([a-zA-Z_\$]\w*)?
+      captures:
+        '1':
+        # name: variable.language.this.coffee
+          name: keyword.other.this.coffee
+        '2':
+          name: variable.other.readwrite.instance.coffee
       name: variable.other.readwrite.instance.coffee
 
   support:
@@ -305,7 +344,8 @@ repository:
             Array|ArrayBuffer|Blob|Boolean|Date|document|Function|
             Int(8|16|32|64)Array|Math|Map|Number|
             Object|Proxy|RegExp|Set|String|WeakMap|
-            window|Uint(8|16|32|64)Array|XMLHttpRequest
+            window|Uint(8|16|32|64)Array|XMLHttpRequest|
+            Buffer
           )\b
       name: support.class.coffee
 
@@ -350,6 +390,13 @@ repository:
       name: entity.name.type.object.coffee
 
     - match: ((?<=console\.)(debug|warn|info|log|error|time|timeEnd|assert))\b
+      name: support.function.console.coffee
+
+    # Module
+    - match: \b(module)\b
+      name: entity.name.type.object.coffee
+
+    - match: ((?<=module\.)(exports))\b
       name: support.function.console.coffee
 
   oop:
@@ -406,7 +453,7 @@ repository:
         '1':
           name: variable.assignment.coffee
         '4':
-          name: keyword.operator.coffee ###############
+          name: keyword.operator.coffee
         '5':
           name: keyword.operator.coffee
       

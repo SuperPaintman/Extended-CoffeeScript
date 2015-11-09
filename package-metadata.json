@@ -1,0 +1,10 @@
+{  
+   "description":"A TextMate Bundle for CoffeeScript / IcedCoffeeScript",
+   "url":"https://github.com/dhoelzgen/iced-coffee-script-tmbundle",
+   "platforms":[  
+      "*"
+   ],
+   "version":"2015.09.11.17.51.00",
+   "sublime_text":"*",
+   "dependencies":[]
+}
