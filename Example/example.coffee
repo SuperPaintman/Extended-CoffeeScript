@@ -13,8 +13,6 @@ search = (keyword, cb) ->
   await $.getJSON host, defer json
   cb json.results
 
-world = new Buffer "hello"
-
 obj =
     name: "Alex"
     sex: "Male"
