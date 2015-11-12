@@ -53,7 +53,7 @@ repository:
     - begin: >-
         (?x)
           (?=\s*)
-          (([a-zA-Z\$_]*)\s*([:=])\s*)?
+          (([a-zA-Z0-9\$_]*)\s*([:=])\s*)?
           (?=\([^()]*\)\s*([=-]>))
       # end: (?<=\))\s*(=>)
       end: (\))\s*([=-]>)
@@ -74,7 +74,7 @@ repository:
     - match: >-
         (?x)
           (?=\s*)
-          (([a-zA-Z\$_]*)\s*([:=])\s*)?
+          (([a-zA-Z0-9\$_]*)\s*([:=])\s*)?
           (?=\s*)([=-]>)
       captures:
         '2':
@@ -94,7 +94,7 @@ repository:
     - include: '#constant'
     - include: '#keyword_operator'
 
-    - match: (@)?([a-zA-Z\$_][\w\.]*)
+    - match: (@)?([a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
           # name: variable.language.this.coffee
@@ -303,7 +303,7 @@ repository:
     - captures:
         '1':
           name: variable.assignment.coffee
-      match: ([a-zA-Z\$_]\w*(\.\w+)*)
+      match: ([a-zA-Z0-9\$_]\w*(\.\w+)*)
       name: variable.assignment.coffee
 
   variable_instance:
@@ -411,7 +411,7 @@ repository:
       name: meta.class.instance.constructo
 
     # Class
-    - match: (class\b)\s+(@?[a-zA-Z\$_][\w\.]*)?(?:\s+(extends)\s+(@?[a-zA-Z\$\._][\w\.]*))?
+    - match: (class\b)\s+(@?[a-zA-Z0-9\$_][\w\.]*)?(?:\s+(extends)\s+(@?[a-zA-Z\$\._][\w\.]*))?
       captures:
         '1':
           name: storage.type.class.coffee
@@ -448,7 +448,7 @@ repository:
       name: meta.brace.square.coffee
 
     # : в объекте
-    - match: ([a-zA-Z\$_](\w|\$|\.)*\s*(?!\::)((:)|(=)(?!>))(?!(\s*\(.*\))?\s*([=-]>)))
+    - match: ([a-zA-Z0-9\$_](\w|\$|\.)*\s*(?!\::)((:)|(=)(?!>))(?!(\s*\(.*\))?\s*([=-]>)))
       captures:
         '1':
           name: variable.assignment.coffee
@@ -489,7 +489,7 @@ repository:
       match: >-
         (?x)
           (\s*)
-          (?=[a-zA-Z\$_])
+          (?=[a-zA-Z0-9\$_])
           (
             [a-zA-Z\$_](\w|\$|:|\.)*\s*
             (?=[:=](\s*\(.*\))?\s*([=-]&gt;))
