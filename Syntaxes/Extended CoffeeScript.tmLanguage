@@ -909,6 +909,21 @@
 					<key>name</key>
 					<string>support.function.console.coffee</string>
 				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(JSON)\b</string>
+					<key>name</key>
+					<string>entity.name.type.object.coffee</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?x)
+  ((?&lt;=JSON\.)(
+        parse|stringify
+  ))\b</string>
+					<key>name</key>
+					<string>support.function.static.array.coffee</string>
+				</dict>
 			</array>
 		</dict>
 		<key>variable</key>

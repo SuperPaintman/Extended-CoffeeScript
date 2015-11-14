@@ -399,6 +399,16 @@ repository:
     - match: ((?<=module\.)(exports))\b
       name: support.function.console.coffee
 
+    # JSON
+    - match: \b(JSON)\b
+      name: entity.name.type.object.coffee
+      
+    - match: >-
+        (?x)
+          ((?<=JSON\.)(
+                parse|stringify
+          ))\b
+      name: support.function.static.array.coffee
   oop:
     patterns:
     - match: (new)\s+(\w+(?:\.\w*)*)
