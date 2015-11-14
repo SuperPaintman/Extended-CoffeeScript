@@ -212,7 +212,15 @@ repository:
     - match: \b(?<!\.)(this|extends)(?!\s*[:=])\b
       name: variable.language.coffee
 
+    # Node.js
+    - include: '#constant_nodejs'
+
     - include: '#constant_numeric'
+
+  constant_nodejs:
+    patterns:
+    - match: \b(__dirname|__filename)\b
+      name: constant.other.nodejs.coffee
 
   constant_numeric:
     patterns:
@@ -392,13 +400,6 @@ repository:
     - match: ((?<=console\.)(debug|warn|info|log|error|time|timeEnd|assert))\b
       name: support.function.console.coffee
 
-    # Module
-    - match: \b(module)\b
-      name: entity.name.type.object.coffee
-
-    - match: ((?<=module\.)(exports))\b
-      name: support.function.console.coffee
-
     # JSON
     - match: \b(JSON)\b
       name: entity.name.type.object.coffee
@@ -406,9 +407,34 @@ repository:
     - match: >-
         (?x)
           ((?<=JSON\.)(
-                parse|stringify
+            parse|stringify
           ))\b
       name: support.function.static.array.coffee
+
+    # Node.js
+    - include: '#support_nodejs'
+
+  support_nodejs:
+    patterns:
+    # Module
+    - match: \b(module)\b
+      name: entity.name.type.object.coffee
+
+    - match: ((?<=module\.)(exports))\b
+      name: support.function.console.coffee
+
+    # Global
+    - match: \b(global)\b
+      name: entity.name.type.object.coffee
+
+    # Process
+    - match: \b(process)\b
+      name: entity.name.type.object.coffee
+
+    # Require
+    - match: \b(require)\b
+      name: support.function.coffee
+
   oop:
     patterns:
     - match: (new)\s+(\w+(?:\.\w*)*)

@@ -166,7 +166,23 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#constant_nodejs</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#constant_numeric</string>
+				</dict>
+			</array>
+		</dict>
+		<key>constant_nodejs</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(__dirname|__filename)\b</string>
+					<key>name</key>
+					<string>constant.other.nodejs.coffee</string>
 				</dict>
 			</array>
 		</dict>
@@ -899,6 +915,31 @@
 				</dict>
 				<dict>
 					<key>match</key>
+					<string>\b(JSON)\b</string>
+					<key>name</key>
+					<string>entity.name.type.object.coffee</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?x)
+  ((?&lt;=JSON\.)(
+    parse|stringify
+  ))\b</string>
+					<key>name</key>
+					<string>support.function.static.array.coffee</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#support_nodejs</string>
+				</dict>
+			</array>
+		</dict>
+		<key>support_nodejs</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
 					<string>\b(module)\b</string>
 					<key>name</key>
 					<string>entity.name.type.object.coffee</string>
@@ -911,18 +952,21 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(JSON)\b</string>
+					<string>\b(global)\b</string>
 					<key>name</key>
 					<string>entity.name.type.object.coffee</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?x)
-  ((?&lt;=JSON\.)(
-        parse|stringify
-  ))\b</string>
+					<string>\b(process)\b</string>
 					<key>name</key>
-					<string>support.function.static.array.coffee</string>
+					<string>entity.name.type.object.coffee</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(require)\b</string>
+					<key>name</key>
+					<string>support.function.coffee</string>
 				</dict>
 			</array>
 		</dict>
