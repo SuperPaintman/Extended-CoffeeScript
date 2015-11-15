@@ -36,6 +36,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#oop</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#keyword</string>
 		</dict>
 		<dict>
@@ -45,10 +49,6 @@
 		<dict>
 			<key>include</key>
 			<string>#support</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#oop</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -279,6 +279,14 @@
 					<string>#keyword_operator</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#string_double_quoted</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string_single_quoted</string>
+				</dict>
+				<dict>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -391,11 +399,11 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.type.instance.coffee</string>
+							<string>support.class.coffee</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(new)\s+(\w+(?:\.\w*)*)</string>
+					<string>(new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)</string>
 					<key>name</key>
 					<string>meta.class.instance.constructo</string>
 				</dict>

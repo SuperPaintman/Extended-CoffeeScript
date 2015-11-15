@@ -21,13 +21,13 @@ patterns:
 
 - include: '#regexp'
 
+- include: '#oop'
+
 - include: '#keyword'
 
 - include: '#variable'
 
 - include: '#support'
-
-- include: '#oop'
 
 - include: '#invalid'
 
@@ -93,6 +93,8 @@ repository:
     patterns:
     - include: '#constant'
     - include: '#keyword_operator'
+    - include: '#string_double_quoted'
+    - include: '#string_single_quoted'
 
     - match: (@)?([a-zA-Z0-9\$_][\w\.]*)
       captures:
@@ -437,13 +439,13 @@ repository:
 
   oop:
     patterns:
-    - match: (new)\s+(\w+(?:\.\w*)*)
+    - match: (new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
           name: keyword.operator.new.coffee
         '2':
-          name: entity.name.type.instance.coffee
-    
+          name: support.class.coffee
+          
       name: meta.class.instance.constructo
 
     # Class
