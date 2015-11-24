@@ -96,6 +96,9 @@ repository:
     - include: '#string_double_quoted'
     - include: '#string_single_quoted'
 
+    - match: ([=-]>)
+      name: storage.type.function.coffee
+
     - match: (@)?([a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
