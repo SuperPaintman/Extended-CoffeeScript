@@ -471,7 +471,7 @@ repository:
 
     - match: >-
         (?x)\b(
-              var
+              var|function
             )\b
       name: invalid.illegal.storage.type.coffee
 
