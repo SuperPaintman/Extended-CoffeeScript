@@ -149,8 +149,8 @@ repository:
             (@)?([a-zA-Z0-9\$_]+)\s+
             (?!(
               break|by|catch|continue|else|finally|
-              for|in|of|if|return|switch|
-              then|throw|try|unless|when|while|
+              for|in|of|return|switch|
+              then|throw|try|when|while|
               until|loop|do|await|defer|
               (?<=for)\s+own|yield
               and=|or=|!|%|&|\^|\*|\/|(\-)?\-(?!>)|\+\+|\+|~|
