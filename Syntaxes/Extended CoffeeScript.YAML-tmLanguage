@@ -23,6 +23,8 @@ patterns:
 
 - include: '#string'
 
+- include: '#invalid'
+
 - include: '#function_call'
 
 - include: '#comment'
@@ -30,8 +32,6 @@ patterns:
 - include: '#variable'
 
 - include: '#function'
-
-- include: '#invalid'
 
 - include: '#other'
 
@@ -418,7 +418,7 @@ repository:
             Int(8|16|32|64)Array|Math|Map|Number|
             Object|Proxy|RegExp|Set|String|WeakMap|
             window|Uint(8|16|32|64)Array|XMLHttpRequest|
-            Buffer
+            Buffer|JSON
           )\b
       name: support.class.coffee
 

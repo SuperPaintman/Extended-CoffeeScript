@@ -40,6 +40,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#invalid</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#function_call</string>
 		</dict>
 		<dict>
@@ -53,10 +57,6 @@
 		<dict>
 			<key>include</key>
 			<string>#function</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#invalid</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -970,7 +970,7 @@
     Int(8|16|32|64)Array|Math|Map|Number|
     Object|Proxy|RegExp|Set|String|WeakMap|
     window|Uint(8|16|32|64)Array|XMLHttpRequest|
-    Buffer
+    Buffer|JSON
   )\b</string>
 					<key>name</key>
 					<string>support.class.coffee</string>

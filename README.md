@@ -15,8 +15,12 @@ Improved version [CoffeeScript](https://github.com/Xavura/CoffeeScript-Sublime-P
 * [*Added*] - highlighting `length` property
 * [*Added*] - highlighting `yield`
 * [*Added*] - highlighting `:` separator in objects
+* [*Added*] - highlighting invalid and deprecated code: `var`, `function` and `;`
+* [*Added*] - highlighting JSON methods
+* [*Added*] - highlighting `module` methods
+* [*Added*] - highlighting `->` and `=>` like function arguments
+* [*Added*] - highlighting function call
 * [*Changed*] - highlighting `#{ ... }` interpolated values in double-quoted strings
-* [*Added*] - highlighting invalid and deprecated code: `var` and `;`
 * [*Changed*] - highlighting function parameters
 * [*Changed*] - highlighting `@` is the class
 
