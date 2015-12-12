@@ -11,32 +11,29 @@ fileTypes:
 uuid: 0321607f-f411-4545-a4e3-9707153e48e6
 
 patterns:
-- include: '#function'
-
-- include: '#string'
-
-- include: '#constant'
-
-- include: '#comment'
+- include: '#oop'
 
 - include: '#regexp'
 
-- include: '#oop'
+- include: '#constant'
 
 - include: '#keyword'
 
+- include: '#support'
+
+- include: '#string'
+
+- include: '#function_call'
+
+- include: '#comment'
+
 - include: '#variable'
 
-- include: '#support'
+- include: '#function'
 
 - include: '#invalid'
 
 - include: '#other'
-
-
-# - include: '#string_single_quoted'
-# - include: '#string_double_quoted'
-# - include: '#constant_numeric'
 
 repository:
   function:
@@ -110,6 +107,69 @@ repository:
           name: keyword.operator.coffee
       name: variable.parameter.function.coffee
 
+  function_call:
+    patterns:
+    # a()
+    - begin: >-
+          (?x)
+            (?=\s*)
+            (?<=\.|\s|^)
+            (@)?([a-zA-Z0-9\$_]+)\s*(?=\()
+      end: (?=\))
+      beginCaptures:
+        '1':
+          name: keyword.other.this.coffee
+        '2':
+          name: entity.name.function.coffee
+      
+      patterns:
+      - include: $self
+
+    # /(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])
+    # Regexp
+    - match: >-
+          (?x)
+            (?=\s*)
+            (?<=@|\.|\s|^)
+            (@)?([a-zA-Z0-9\$_]+)\s+
+            (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))
+
+      captures:
+        '1':
+          name: keyword.other.this.coffee
+        '2':
+          name: entity.name.function.coffee
+
+    # TODO: сделать более компактно
+    # Inline
+    - match: >-
+          (?x)
+            (?=\s*)
+            (?<=@|\.|\s|^)
+            (@)?([a-zA-Z0-9\$_]+)\s+
+            (?!(
+              break|by|catch|continue|else|finally|
+              for|in|of|if|return|switch|
+              then|throw|try|unless|when|while|
+              until|loop|do|await|defer|
+              (?<=for)\s+own|yield
+              and=|or=|!|%|&|\^|\*|\/|(\-)?\-(?!>)|\+\+|\+|~|
+              ==|=(?!>)|!=|<=|>=|<<=|>>=|
+              >>>=|<>|<|>|!|&&|\.\.(\.)?|\?|\||\|\||\:|\*=|
+              (?<!\()/=|%=|\+=|\-=|&=|\^=|
+              (?<![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
+            ))
+            (?=(@|@?[a-zA-Z0-9\$_]+)|([\'\"\[\{])|([=-]>))
+
+      captures:
+        '1':
+          name: keyword.other.this.coffee
+        '2':
+          name: entity.name.function.coffee
+      
+      patterns:
+      - include: $self
+
   string:
     patterns:
     # Multi-line string
@@ -133,10 +193,10 @@ repository:
           name: punctuation.definition.string.end.coffee
       name: string.quoted.triple.coffee
 
+    - include: '#string_interpolated'
     - include: '#string_js'
     - include: '#string_double_quoted'
     - include: '#string_single_quoted'
-    - include: '#string_interpolated'
 
   string_double_quoted:
     patterns:

@@ -16,19 +16,7 @@
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#function</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#string</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#constant</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#comment</string>
+			<string>#oop</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -36,7 +24,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#oop</string>
+			<string>#constant</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -44,11 +32,27 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#support</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#string</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#function_call</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#comment</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#variable</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#support</string>
+			<string>#function</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -263,6 +267,102 @@
   (?=\s*)
   (([a-zA-Z0-9\$_]*)\s*([:=])\s*)?
   (?=\s*)([=-]&gt;)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>function_call</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?x)
+  (?=\s*)
+  (?&lt;=\.|\s|^)
+  (@)?([a-zA-Z0-9\$_]+)\s*(?=\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.coffee</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=\))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.coffee</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?x)
+  (?=\s*)
+  (?&lt;=@|\.|\s|^)
+  (@)?([a-zA-Z0-9\$_]+)\s+
+  (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.coffee</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?x)
+  (?=\s*)
+  (?&lt;=@|\.|\s|^)
+  (@)?([a-zA-Z0-9\$_]+)\s+
+  (?!(
+    break|by|catch|continue|else|finally|
+    for|in|of|if|return|switch|
+    then|throw|try|unless|when|while|
+    until|loop|do|await|defer|
+    (?&lt;=for)\s+own|yield
+    and=|or=|!|%|&amp;|\^|\*|\/|(\-)?\-(?!&gt;)|\+\+|\+|~|
+    ==|=(?!&gt;)|!=|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|
+    &gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\.\.(\.)?|\?|\||\|\||\:|\*=|
+    (?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|
+    (?&lt;![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
+  ))
+  (?=(@|@?[a-zA-Z0-9\$_]+)|([\'\"\[\{])|([=-]&gt;))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -671,6 +771,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#string_interpolated</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#string_js</string>
 				</dict>
 				<dict>
@@ -680,10 +784,6 @@
 				<dict>
 					<key>include</key>
 					<string>#string_single_quoted</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#string_interpolated</string>
 				</dict>
 			</array>
 		</dict>
