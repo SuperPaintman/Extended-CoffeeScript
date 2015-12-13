@@ -279,7 +279,7 @@
 					<string>(?x)
   (?=\s*)
   (?&lt;=\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)\s*(?=\()</string>
+  (@)?([a-zA-Z0-9\$_]+)(?=\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -355,7 +355,7 @@
     (?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|
     (?&lt;![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
   ))
-  (?=(@|@?[a-zA-Z0-9\$_]+)|([\'\"\[\{])|([=-]&gt;))</string>
+  (?=(@|@?[a-zA-Z0-9\$_]+)|([\'\"\[\{])|((\(.*\))?[=-]&gt;))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
