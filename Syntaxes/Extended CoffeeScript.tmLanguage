@@ -281,7 +281,7 @@
   (?&lt;=\.|\s|^)
   (@)?([a-zA-Z0-9\$_]+)
   (\?)?
-  (?=\()</string>
+  (\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -301,7 +301,15 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?=\))</string>
+					<string>(\))([=-]&gt;)?</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.storage.type.function.coffee</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -452,7 +460,7 @@
 				<dict>
 					<key>match</key>
 					<string>(?x)\b(
-      var|function
+      var|function|with
     )\b</string>
 					<key>name</key>
 					<string>invalid.illegal.storage.type.coffee</string>
@@ -515,6 +523,48 @@
 		<dict>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?x)
+  (new)\s+
+  (@)?
+  ([a-zA-Z0-9\$_][\w\.]*)
+  (\?)?
+  (\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.new.coffee</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.this.coffee</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.coffee</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(\))([=-]&gt;)?</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.storage.type.function.coffee</string>
+						</dict>
+					</dict>
+				</dict>
 				<dict>
 					<key>captures</key>
 					<dict>

@@ -116,8 +116,8 @@ repository:
             (?<=\.|\s|^)
             (@)?([a-zA-Z0-9\$_]+)
             (\?)?
-            (?=\()
-      end: (?=\))
+            (\()
+      end: (\))([=-]>)?
       beginCaptures:
         '1':
           name: keyword.other.this.coffee
@@ -125,6 +125,10 @@ repository:
           name: entity.name.function.coffee
         '3':
           name: keyword.operator.coffee
+
+      endCaptures:
+        '2':
+          name: invalid.illegal.storage.type.function.coffee
       
       patterns:
       - include: $self
@@ -514,6 +518,29 @@ repository:
 
   oop:
     patterns:
+    # Illegal `->`
+    - begin: >-
+          (?x)
+            (new)\s+
+            (@)?
+            ([a-zA-Z0-9\$_][\w\.]*)
+            (\?)?
+            (\()
+      end: (\))([=-]>)?
+      beginCaptures:
+        '1':
+          name: keyword.operator.new.coffee
+        '2':
+          name: keyword.other.this.coffee
+        '3':
+          name: support.class.coffee
+        '4':
+          name: keyword.operator.coffee
+
+      endCaptures:
+        '2':
+          name: invalid.illegal.storage.type.function.coffee
+      
     - match: (new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
@@ -543,7 +570,7 @@ repository:
 
     - match: >-
         (?x)\b(
-              var|function
+              var|function|with
             )\b
       name: invalid.illegal.storage.type.coffee
 
