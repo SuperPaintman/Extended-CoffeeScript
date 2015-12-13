@@ -279,7 +279,9 @@
 					<string>(?x)
   (?=\s*)
   (?&lt;=\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)(?=\()</string>
+  (@)?([a-zA-Z0-9\$_]+)
+  (\?)?
+  (?=\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -291,6 +293,11 @@
 						<dict>
 							<key>name</key>
 							<string>entity.name.function.coffee</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -316,12 +323,19 @@
 							<key>name</key>
 							<string>entity.name.function.coffee</string>
 						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
 					</dict>
 					<key>match</key>
 					<string>(?x)
   (?=\s*)
   (?&lt;=@|\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)\s+
+  (@)?([a-zA-Z0-9\$_]+)
+  (\?)?
+  \s+
   (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))</string>
 				</dict>
 				<dict>
@@ -337,12 +351,19 @@
 							<key>name</key>
 							<string>entity.name.function.coffee</string>
 						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.coffee</string>
+						</dict>
 					</dict>
 					<key>match</key>
 					<string>(?x)
   (?=\s*)
   (?&lt;=@|\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)\s+
+  (@)?([a-zA-Z0-9\$_]+)
+  (\?)?
+  \s+
   (?!(
     break|by|catch|continue|else|finally|
     for|in|of|return|switch|

@@ -114,13 +114,17 @@ repository:
           (?x)
             (?=\s*)
             (?<=\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)(?=\()
+            (@)?([a-zA-Z0-9\$_]+)
+            (\?)?
+            (?=\()
       end: (?=\))
       beginCaptures:
         '1':
           name: keyword.other.this.coffee
         '2':
           name: entity.name.function.coffee
+        '3':
+          name: keyword.operator.coffee
       
       patterns:
       - include: $self
@@ -131,7 +135,9 @@ repository:
           (?x)
             (?=\s*)
             (?<=@|\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)\s+
+            (@)?([a-zA-Z0-9\$_]+)
+            (\?)?
+            \s+
             (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))
 
       captures:
@@ -139,6 +145,8 @@ repository:
           name: keyword.other.this.coffee
         '2':
           name: entity.name.function.coffee
+        '3':
+          name: keyword.operator.coffee
 
     # TODO: сделать более компактно
     # Inline
@@ -146,7 +154,9 @@ repository:
           (?x)
             (?=\s*)
             (?<=@|\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)\s+
+            (@)?([a-zA-Z0-9\$_]+)
+            (\?)?
+            \s+
             (?!(
               break|by|catch|continue|else|finally|
               for|in|of|return|switch|
@@ -166,6 +176,8 @@ repository:
           name: keyword.other.this.coffee
         '2':
           name: entity.name.function.coffee
+        '3':
+          name: keyword.operator.coffee
       
       patterns:
       - include: $self
