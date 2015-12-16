@@ -564,6 +564,13 @@
 							<string>invalid.illegal.storage.type.function.coffee</string>
 						</dict>
 					</dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>captures</key>

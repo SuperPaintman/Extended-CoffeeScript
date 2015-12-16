@@ -540,7 +540,11 @@ repository:
       endCaptures:
         '2':
           name: invalid.illegal.storage.type.function.coffee
-      
+          
+      patterns:
+      - include: $self
+
+
     - match: (new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
