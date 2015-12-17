@@ -117,7 +117,7 @@ repository:
             (@)?([a-zA-Z0-9\$_]+)
             (\?)?
             (\()
-      end: (\))([=-]>)?
+      end: (\))([=-]>)
       beginCaptures:
         '1':
           name: keyword.other.this.coffee
@@ -173,7 +173,7 @@ repository:
               (?<!\()/=|%=|\+=|\-=|&=|\^=|
               (?<![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
             ))
-            (?=(@|@?[a-zA-Z0-9\$_]+)|([\'\"\[\{])|((\(.*\))?[=-]>))
+            (?=(@|@?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]>)|([\'\"\[\{\()]))
 
       captures:
         '1':
