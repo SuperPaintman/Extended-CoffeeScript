@@ -378,13 +378,13 @@
     then|throw|try|when|while|
     until|loop|do|await|defer|
     (?&lt;=for)\s+own|yield
-    and=|or=|!|%|&amp;|\^|\*|\/|(\-)?\-(?!&gt;)|\+\+|\+|~|
+    and=|or=|%|&amp;|\^|\*|\/|(\-)?\-(?!&gt;)|\+\+|\+|~|
     ==|=(?!&gt;)|!=|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|
-    &gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\.\.(\.)?|\?|\||\|\||\:|\*=|
+    &gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|&amp;&amp;|\.\.(\.)?|\?|\||\|\||\:|\*=|
     (?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|
     (?&lt;![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
   ))
-  (?=(@|@?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]&gt;)|([\'\"\[\{\()]))</string>
+  (?=(@|@?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]&gt;)|([\'\"\[\{\(]))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
