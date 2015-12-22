@@ -460,7 +460,8 @@
 				<dict>
 					<key>match</key>
 					<string>(?x)\b(
-      var|function|with
+      var|const|let|
+      function|with
     )\b</string>
 					<key>name</key>
 					<string>invalid.illegal.storage.type.coffee</string>

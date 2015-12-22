@@ -581,7 +581,8 @@ repository:
 
     - match: >-
         (?x)\b(
-              var|function|with
+              var|const|let|
+              function|with
             )\b
       name: invalid.illegal.storage.type.coffee
 
