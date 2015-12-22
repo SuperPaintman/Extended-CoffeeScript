@@ -779,6 +779,10 @@
 					<array>
 						<dict>
 							<key>include</key>
+							<string>source.regexp</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#string_interpolated</string>
 						</dict>
 						<dict>
@@ -788,10 +792,27 @@
 					</array>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])</string>
+					<key>begin</key>
+					<string>/(?![\s=/*+{}?]).*?[^\\]</string>
+					<key>end</key>
+					<string>/[igmy]{0,4}(?![a-zA-Z0-9])</string>
 					<key>name</key>
 					<string>string.regexp.coffee</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.regexp</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string_interpolated</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment_embedded</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
@@ -967,10 +988,8 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>match</key>
-							<string>\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)</string>
-							<key>name</key>
-							<string>constant.character.escape.coffee</string>
+							<key>include</key>
+							<string>source.js</string>
 						</dict>
 					</array>
 				</dict>

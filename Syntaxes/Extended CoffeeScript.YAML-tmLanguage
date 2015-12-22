@@ -258,8 +258,9 @@ repository:
           name: punctuation.definition.string.end.coffee
       name: string.interpolated.script.coffee
       patterns:
-      - match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)
-        name: constant.character.escape.coffee
+      - include: 'source.js'
+      # - match: \\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)
+      #   name: constant.character.escape.coffee
 
   string_interpolated:
     patterns:
@@ -345,12 +346,18 @@ repository:
       end: /{3}[imgy]{0,4}
       name: string.regexp.coffee
       patterns:
+      - include: 'source.regexp'
       - include: '#string_interpolated'
       - include: '#comment_embedded'
 
     # Single regexp
-    - match: /(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])
+    - begin: /(?![\s=/*+{}?]).*?[^\\]
+      end: /[igmy]{0,4}(?![a-zA-Z0-9])
       name: string.regexp.coffee
+      patterns:
+      - include: 'source.regexp'
+      - include: '#string_interpolated'
+      - include: '#comment_embedded'
 
   keyword:
     patterns:
