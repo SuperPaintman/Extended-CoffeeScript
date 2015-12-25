@@ -942,7 +942,7 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.operator.coffee</string>
+							<string>punctuation.section.embedded.coffee</string>
 						</dict>
 					</dict>
 					<key>end</key>

@@ -268,7 +268,7 @@ repository:
       captures:
         '0':
           # name: punctuation.section.embedded.coffee
-          name: keyword.operator.coffee
+          name: punctuation.section.embedded.coffee
       end: \}
       name: source.coffee.embedded.source
       patterns:
