@@ -418,7 +418,9 @@ repository:
     # General
     - match: >-
         (?x)\b(
-              decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int)|require
+              decodeURI(Component)?|encodeURI(Component)?|
+              eval|parse(Float|Int)|require|
+              clearTimeout|setTimeout|clearInterval|setInterval
             )\b
       name: support.function.coffee
 
