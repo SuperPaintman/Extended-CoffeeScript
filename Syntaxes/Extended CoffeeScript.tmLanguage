@@ -279,7 +279,7 @@
 					<string>(?x)
   (?=\s*)
   (?&lt;=\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)
+  (@|this)?([a-zA-Z0-9\$_]+)
   (\?)?
   (\()</string>
 					<key>beginCaptures</key>
@@ -340,8 +340,8 @@
 					<key>match</key>
 					<string>(?x)
   (?=\s*)
-  (?&lt;=@|\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)
+  (?&lt;=@|this|\.|\s|^)
+  (@|this)?([a-zA-Z0-9\$_]+)
   (\?)?
   \s+
   (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))</string>
@@ -368,8 +368,8 @@
 					<key>match</key>
 					<string>(?x)
   (?=\s*)
-  (?&lt;=@|\.|\s|^)
-  (@)?([a-zA-Z0-9\$_]+)
+  (?&lt;=@|this|\.|\s|^)
+  (@|this)?([a-zA-Z0-9\$_]+)
   (\?)?
   \s+
   (?!(
@@ -384,7 +384,7 @@
     (?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|
     (?&lt;![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
   ))
-  (?=(@|@?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]&gt;)|([\'\"\[\{\(])|(\\))</string>
+  (?=(@|this|(@|this)?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]&gt;)|([\'\"\[\{\(])|(\\))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -441,7 +441,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(@)?([a-zA-Z0-9\$_][\w\.]*)</string>
+					<string>(@|this)?([a-zA-Z0-9\$_][\w\.]*)</string>
 					<key>name</key>
 					<string>variable.parameter.function.coffee</string>
 				</dict>
@@ -528,7 +528,7 @@
 					<key>begin</key>
 					<string>(?x)
   (new)\s+
-  (@)?
+  (@|this)?
   ([a-zA-Z0-9\$_][\w\.]*)
   (\?)?
   (\()</string>
@@ -588,7 +588,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)</string>
+					<string>(new)\s+(((@|this)(\.)?)?[a-zA-Z0-9\$_][\w\.]*)</string>
 					<key>name</key>
 					<string>meta.class.instance.constructo</string>
 				</dict>
@@ -605,19 +605,19 @@
 							<key>name</key>
 							<string>entity.name.type.class.coffee</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>keyword.control.inheritance.coffee</string>
 						</dict>
-						<key>4</key>
+						<key>5</key>
 						<dict>
 							<key>name</key>
 							<string>entity.other.inherited-class.coffee</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(class\b)\s+(@?[a-zA-Z0-9\$_][\w\.]*)?(?:\s+(extends)\s+(@?[a-zA-Z\$\._][\w\.]*))?</string>
+					<string>(class\b)\s+((@|this)?[a-zA-Z0-9\$_][\w\.]*)?(?:\s+(extends)\s+((@|this)?[a-zA-Z\$\._][\w\.]*))?</string>
 					<key>name</key>
 					<string>meta.class.coffee</string>
 				</dict>
@@ -1217,7 +1217,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(@)([a-zA-Z_\$]\w*)?</string>
+					<string>(@|this)([a-zA-Z_\$]\w*)?</string>
 					<key>name</key>
 					<string>variable.other.readwrite.instance.coffee</string>
 				</dict>

@@ -96,7 +96,7 @@ repository:
     - match: ([=-]>)
       name: storage.type.function.coffee
 
-    - match: (@)?([a-zA-Z0-9\$_][\w\.]*)
+    - match: (@|this)?([a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
           # name: variable.language.this.coffee
@@ -114,7 +114,7 @@ repository:
           (?x)
             (?=\s*)
             (?<=\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)
+            (@|this)?([a-zA-Z0-9\$_]+)
             (\?)?
             (\()
       end: (\))([=-]>)?
@@ -138,8 +138,8 @@ repository:
     - match: >-
           (?x)
             (?=\s*)
-            (?<=@|\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)
+            (?<=@|this|\.|\s|^)
+            (@|this)?([a-zA-Z0-9\$_]+)
             (\?)?
             \s+
             (?=(/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])))
@@ -157,8 +157,8 @@ repository:
     - match: >-
           (?x)
             (?=\s*)
-            (?<=@|\.|\s|^)
-            (@)?([a-zA-Z0-9\$_]+)
+            (?<=@|this|\.|\s|^)
+            (@|this)?([a-zA-Z0-9\$_]+)
             (\?)?
             \s+
             (?!(
@@ -173,7 +173,7 @@ repository:
               (?<!\()/=|%=|\+=|\-=|&=|\^=|
               (?<![\.\$])(instanceof|delete|typeof|and|or|is|isnt|not|super)
             ))
-            (?=(@|@?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]>)|([\'\"\[\{\(])|(\\))
+            (?=(@|this|(@|this)?[a-zA-Z0-9\$_]+)|((\(.*\))?[=-]>)|([\'\"\[\{\(])|(\\))
 
       captures:
         '1':
@@ -404,7 +404,7 @@ repository:
 
   variable_instance:
     patterns:
-    - match: (@)([a-zA-Z_\$]\w*)?
+    - match: (@|this)([a-zA-Z_\$]\w*)?
       captures:
         '1':
         # name: variable.language.this.coffee
@@ -531,7 +531,7 @@ repository:
     - begin: >-
           (?x)
             (new)\s+
-            (@)?
+            (@|this)?
             ([a-zA-Z0-9\$_][\w\.]*)
             (\?)?
             (\()
@@ -554,7 +554,7 @@ repository:
       - include: $self
 
 
-    - match: (new)\s+(@?[a-zA-Z0-9\$_][\w\.]*)
+    - match: (new)\s+(((@|this)(\.)?)?[a-zA-Z0-9\$_][\w\.]*)
       captures:
         '1':
           name: keyword.operator.new.coffee
@@ -564,15 +564,15 @@ repository:
       name: meta.class.instance.constructo
 
     # Class
-    - match: (class\b)\s+(@?[a-zA-Z0-9\$_][\w\.]*)?(?:\s+(extends)\s+(@?[a-zA-Z\$\._][\w\.]*))?
+    - match: (class\b)\s+((@|this)?[a-zA-Z0-9\$_][\w\.]*)?(?:\s+(extends)\s+((@|this)?[a-zA-Z\$\._][\w\.]*))?
       captures:
         '1':
           name: storage.type.class.coffee
         '2':
           name: entity.name.type.class.coffee
-        '3':
-          name: keyword.control.inheritance.coffee
         '4':
+          name: keyword.control.inheritance.coffee
+        '5':
           name: entity.other.inherited-class.coffee
       name: meta.class.coffee
 
