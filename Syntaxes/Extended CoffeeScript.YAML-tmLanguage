@@ -100,7 +100,7 @@ repository:
       captures:
         '1':
           # name: variable.language.this.coffee
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '2':
           name: variable.parameter.function.coffee
         '4':
@@ -120,7 +120,7 @@ repository:
       end: (\))([=-]>)?
       beginCaptures:
         '1':
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '2':
           name: entity.name.function.coffee
         '3':
@@ -146,7 +146,7 @@ repository:
 
       captures:
         '1':
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '2':
           name: entity.name.function.coffee
         '3':
@@ -177,7 +177,7 @@ repository:
 
       captures:
         '1':
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '2':
           name: entity.name.function.coffee
         '3':
@@ -292,7 +292,7 @@ repository:
 
     # OOP
     - match: \b(?<!\.)(this|extends)(?!\s*[:=])\b
-      name: variable.language.coffee
+      name: variable.language.this.coffee
 
     # Node.js
     - include: '#constant_nodejs'
@@ -408,7 +408,7 @@ repository:
       captures:
         '1':
         # name: variable.language.this.coffee
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '2':
           name: variable.other.readwrite.instance.coffee
       name: variable.other.readwrite.instance.coffee
@@ -540,7 +540,7 @@ repository:
         '1':
           name: keyword.operator.new.coffee
         '2':
-          name: keyword.other.this.coffee
+          name: variable.language.this.coffee
         '3':
           name: support.class.coffee
         '4':

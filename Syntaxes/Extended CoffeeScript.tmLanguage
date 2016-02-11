@@ -166,7 +166,7 @@
 					<key>match</key>
 					<string>\b(?&lt;!\.)(this|extends)(?!\s*[:=])\b</string>
 					<key>name</key>
-					<string>variable.language.coffee</string>
+					<string>variable.language.this.coffee</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -287,7 +287,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -324,7 +324,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -352,7 +352,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -427,7 +427,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -542,7 +542,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>3</key>
 						<dict>
@@ -1208,7 +1208,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.this.coffee</string>
+							<string>variable.language.this.coffee</string>
 						</dict>
 						<key>2</key>
 						<dict>
