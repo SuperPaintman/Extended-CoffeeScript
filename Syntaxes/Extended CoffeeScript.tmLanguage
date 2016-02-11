@@ -784,7 +784,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#string_interpolated</string>
+							<string>#string_template</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -807,7 +807,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#string_interpolated</string>
+							<string>#string_template</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -868,14 +868,13 @@
 					</dict>
 					<key>name</key>
 					<string>string.quoted.triple.coffee</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#string_interpolated</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#string_js</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string_template</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -884,6 +883,10 @@
 				<dict>
 					<key>include</key>
 					<string>#string_single_quoted</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string_js</string>
 				</dict>
 			</array>
 		</dict>
@@ -924,36 +927,7 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#string_interpolated</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>string_interpolated</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>\#\{</string>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.embedded.coffee</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\}</string>
-					<key>name</key>
-					<string>source.coffee.embedded.source</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
+							<string>#string_template</string>
 						</dict>
 					</array>
 				</dict>
@@ -1030,6 +1004,35 @@
 							<string>\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)</string>
 							<key>name</key>
 							<string>constant.character.escape.coffee</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>string_template</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\#\{</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.embedded.coffee</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\}</string>
+					<key>name</key>
+					<string>source.coffee.embedded.source</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>$self</string>
 						</dict>
 					</array>
 				</dict>
